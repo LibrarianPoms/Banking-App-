@@ -1,0 +1,350 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #005792;
+    color: #fff;
+    padding: 1rem 2rem;
+}
+
+header h1 {
+    margin-bottom: 1rem;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-right: 1.5rem;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 0;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #d6eaff;
+}
+
+nav ul li a.active {
+    border-bottom: 2px solid #fff;
+    font-weight: bold;
+}
+
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+section {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+h2 {
+    color: #005792;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+h3 {
+    margin: 1.5rem 0 1rem;
+    color: #333;
+}
+
+.hidden {
+    display: none;
+}
+
+.section-active {
+    display: block;
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+button {
+    background-color: #005792;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #003d66;
+}
+
+/* Dashboard */
+.dashboard {
+    margin-top: 2rem;
+}
+
+.client-info, .accounts-section, .employee-actions, .admin-actions {
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.accounts-section h3, .employee-actions h3, .admin-actions h3 {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+#accounts-list {
+    margin-bottom: 1.5rem;
+}
+
+.account-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.account-card h4 {
+    margin-bottom: 0.5rem;
+    color: #005792;
+}
+
+/* Tabs for admin panel */
+.tabs {
+    display: flex;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.tab-btn {
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 0.5rem 1rem;
+    margin-right: 0.5rem;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+    cursor: pointer;
+}
+
+.tab-btn.active {
+    background-color: #005792;
+    color: #fff;
+}
+
+.tab-content {
+    display: none;
+    padding: 1rem;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* User lists */
+.users-list {
+    margin-bottom: 1.5rem;
+}
+
+.user-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-card .user-info {
+    flex-grow: 1;
+}
+
+.user-card .user-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.user-card .user-actions button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.9rem;
+}
+
+.user-card .edit-btn {
+    background-color: #ffa500;
+}
+
+.user-card .delete-btn {
+    background-color: #d9534f;
+}
+
+/* Stats cards */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.stat-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.stat-card h4 {
+    margin-bottom: 0.5rem;
+    color: #005792;
+}
+
+.stat-card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Enhanced transaction list */
+.transaction-history {
+    margin-top: 1.5rem;
+}
+
+.transaction-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.transaction-table th, .transaction-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.transaction-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.transaction-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+.transaction-table .positive {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.transaction-table .negative {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* Client transaction history in employee view */
+#client-transactions-list tr:hover {
+    background-color: #f5f5f5;
+}
+
+#client-details .transaction-history {
+    margin-top: 1rem;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Account blocking styles */
+.account-blocked {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.account-active {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.block-account-btn.account-active {
+    background-color: #dc3545;
+    color: white;
+}
+
+.block-account-btn.account-blocked {
+    background-color: #28a745;
+    color: white;
+}
+
+.account-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+/* Footer and responsive */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: #005792;
+    color: #fff;
+    margin-top: 2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+    }
+    
+    nav ul li {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+    }
+    
+    .stats-container {
+        grid-template-columns: 1fr;
+    }
+}

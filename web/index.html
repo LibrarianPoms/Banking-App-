@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Système Bancaire</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Système Bancaire</h1>
+        <nav>
+            <ul>
+                <li><a href="#" id="client-link" class="active">Espace Client</a></li>
+                <li><a href="#" id="employee-link">Espace Employé</a></li>
+                <li><a href="#" id="admin-link">Administration</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Client Section -->
+        <section id="client-section" class="section-active">
+            <h2>Espace Client</h2>
+            <div class="auth-form">
+                <h3>Connexion Client</h3>
+                <form id="client-login-form">
+                    <div class="form-group">
+                        <label for="client-id">ID Client:</label>
+                        <input type="text" id="client-id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="client-email">Email:</label>
+                        <input type="email" id="client-email" required>
+                    </div>
+                    <button type="submit">Se Connecter</button>
+                </form>
+            </div>
+
+            <div id="client-dashboard" class="dashboard hidden">
+                <h3>Tableau de Bord</h3>
+                <div class="client-info">
+                    <p>Nom: <span id="client-name"></span></p>
+                    <p>Numéro: <span id="client-number"></span></p>
+                    <p>Email: <span id="client-email-display"></span></p>
+                </div>
+
+                <div class="accounts-section">
+                    <h3>Mes Comptes</h3>
+                    <div id="accounts-list"></div>
+                    
+                    <div class="transaction-form">
+                        <h3>Effectuer une Transaction</h3>
+                        <form id="transaction-form">
+                            <div class="form-group">
+                                <label for="account-select">Compte:</label>
+                                <select id="account-select" required></select>
+                            </div>
+                            <div class="form-group">
+                                <label for="transaction-type">Type:</label>
+                                <select id="transaction-type" required>
+                                    <option value="DEPOT">Dépôt</option>
+                                    <option value="RETRAIT">Retrait</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="transaction-amount">Montant:</label>
+                                <input type="number" id="transaction-amount" min="0" step="0.01" required>
+                            </div>
+                            <button type="submit">Valider</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Employee Section -->
+        <section id="employee-section" class="hidden">
+            <h2>Espace Employé</h2>
+            <div class="auth-form">
+                <h3>Connexion Employé</h3>
+                <form id="employee-login-form">
+                    <div class="form-group">
+                        <label for="employee-id">ID Employé:</label>
+                        <input type="text" id="employee-id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="employee-name">Nom:</label>
+                        <input type="text" id="employee-name" required>
+                    </div>
+                    <button type="submit">Se Connecter</button>
+                </form>
+            </div>
+
+            <div id="employee-dashboard" class="dashboard hidden">
+                <h3>Tableau de Bord Employé</h3>
+                
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="accounts-management-tab">Gestion des Comptes</button>
+                    <button class="tab-btn" data-tab="transactions-tab">Transactions</button>
+                    <button class="tab-btn" data-tab="client-management-tab">Clients</button>
+                </div>
+                
+                <!-- Accounts Management Tab -->
+                <div id="accounts-management-tab" class="tab-content active">
+                    <h3>Créer un Nouveau Compte</h3>
+                    <form id="create-account-form">
+                        <div class="form-group">
+                            <label for="client-id-input">Client:</label>
+                            <select id="client-id-input" required>
+                                <option value="" disabled selected>Sélectionnez un client</option>
+                                <!-- Options will be populated dynamically -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="account-type">Type de Compte:</label>
+                            <select id="account-type" required>
+                                <option value="COURANT">Compte Courant</option>
+                                <option value="EPARGNE">Compte Épargne</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="initial-balance">Solde Initial:</label>
+                            <input type="number" id="initial-balance" min="0" step="0.01" value="0" required>
+                            <small class="form-text">Les clients devront effectuer un dépôt pour alimenter leur compte.</small>
+                        </div>
+                        <button type="submit">Créer</button>
+                    </form>
+                    
+                    <h3>Gérer les Comptes</h3>
+                    <div class="form-group">
+                        <label for="search-account">Rechercher un compte:</label>
+                        <input type="text" id="search-account" placeholder="Entrez l'ID du compte">
+                        <button id="search-account-btn">Rechercher</button>
+                    </div>
+                    <div id="employee-accounts-list"></div>
+                </div>
+                
+                <!-- Transactions Tab -->
+                <div id="transactions-tab" class="tab-content">
+                    <h3>Historique des Transactions</h3>
+                    <div class="transaction-history">
+                        <table class="transaction-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Compte</th>
+                                    <th>Type</th>
+                                    <th>Montant</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactions-list">
+                                <!-- Transactions will be added here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3>Valider une Transaction</h3>
+                    <form id="validate-transaction-form">
+                        <div class="form-group">
+                            <label for="transaction-id">ID Transaction:</label>
+                            <input type="text" id="transaction-id" required>
+                        </div>
+                        <button type="submit">Valider</button>
+                    </form>
+                </div>
+                
+                <!-- Client Management Tab -->
+                <div id="client-management-tab" class="tab-content">
+                    <h3>Liste des Clients</h3>
+                    <div id="employee-clients-list" class="users-list"></div>
+                    
+                    <h3>Détails du Client</h3>
+                    <div class="form-group">
+                        <label for="client-details-id">ID Client:</label>
+                        <input type="text" id="client-details-id">
+                        <button id="get-client-details-btn">Afficher</button>
+                    </div>
+                    <div id="client-details" class="hidden">
+                        <div class="client-info">
+                            <p>Nom: <span id="detail-client-name"></span></p>
+                            <p>Numéro: <span id="detail-client-number"></span></p>
+                            <p>Email: <span id="detail-client-email"></span></p>
+                        </div>
+                        <h4>Comptes du Client</h4>
+                        <div id="detail-client-accounts"></div>
+                        
+                        <h4>Historique des Transactions</h4>
+                        <div class="transaction-history">
+                            <table class="transaction-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Compte</th>
+                                        <th>Type</th>
+                                        <th>Montant</th>
+                                        <th>Date</th>
+                                        <th>Statut</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="client-transactions-list">
+                                    <!-- Client transactions will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Section -->
+        <section id="admin-section" class="hidden">
+            <h2>Administration</h2>
+            <div class="auth-form">
+                <h3>Connexion Admin</h3>
+                <form id="admin-login-form">
+                    <div class="form-group">
+                        <label for="admin-id">ID Admin:</label>
+                        <input type="text" id="admin-id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-name">Nom:</label>
+                        <input type="text" id="admin-name" required>
+                    </div>
+                    <button type="submit">Se Connecter</button>
+                </form>
+            </div>
+
+            <div id="admin-dashboard" class="dashboard hidden">
+                <h3>Tableau de Bord Admin</h3>
+                
+                <div class="admin-actions">
+                    <h3>Gérer les Utilisateurs</h3>
+                    
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="clients-tab">Clients</button>
+                        <button class="tab-btn" data-tab="employees-tab">Employés</button>
+                    </div>
+                    
+                    <div id="clients-tab" class="tab-content active">
+                        <h4>Liste des Clients</h4>
+                        <div id="clients-list" class="users-list"></div>
+                        
+                        <h4>Ajouter un Nouveau Client</h4>
+                        <form id="add-client-form">
+                            <div class="form-group">
+                                <label for="new-client-id">ID Client:</label>
+                                <input type="text" id="new-client-id" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-client-name">Nom:</label>
+                                <input type="text" id="new-client-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-client-number">Numéro:</label>
+                                <input type="text" id="new-client-number" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-client-email">Email:</label>
+                                <input type="email" id="new-client-email" required>
+                            </div>
+                            <button type="submit">Ajouter</button>
+                        </form>
+                    </div>
+                    
+                    <div id="employees-tab" class="tab-content">
+                        <h4>Liste des Employés</h4>
+                        <div id="employees-list" class="users-list"></div>
+                        
+                        <h4>Ajouter un Nouvel Employé</h4>
+                        <form id="add-employee-form">
+                            <div class="form-group">
+                                <label for="new-employee-id">ID Employé:</label>
+                                <input type="text" id="new-employee-id" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-employee-name">Nom:</label>
+                                <input type="text" id="new-employee-name" required>
+                            </div>
+                            <button type="submit">Ajouter</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="admin-actions">
+                    <h3>Suivi du Système</h3>
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <h4>Nombre de Clients</h4>
+                            <p id="client-count">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Nombre de Comptes</h4>
+                            <p id="account-count">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Nombre de Transactions</h4>
+                            <p id="transaction-count">0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Système Bancaire - Tous droits réservés</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
